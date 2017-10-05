@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>get air txt</title>
+  <!--link rel="stylesheet" href="./css/bootstrap.min.css" id="bt-theme"-->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+	<table id="example" class="display" width="100%"></table>
+</div>
+
+<!--script src="https://code.jquery.com/jquery-3.2.1.min.js"></script-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="./js/csv2arr.js"></script>
+<script type="text/javascript">
+var AirData  = null;
+
+      $.get( "getAir.php", function( data ) {
+        //var text = "航廈,種類,航空公司代碼,航空公司中文 ,班次,機門,表訂日期,表訂時間,預計日期 ,預計時間,往來地點,往來地點英文,往來地點中文,Flight Status ,機型,其他航點,其他航點英文 ,其他航點中文 ,行李轉盤,報到櫃台  \n";
+        //text+=data;
+        //console.log(text);
+        var text = data;
+        //console.log(csvJSON(text));
+        //console.log(csv2array(text));
+        AirData = csv2array(text);
+
+		  $('#example').DataTable( {
+		        data: AirData,
+		        columns: [
+		            { title: "航廈" },
+		            { title: "種類" },
+		            { title: "航空公司代碼" },
+		            { title: "航空公司中文" },
+		            { title: "班次" },
+		            { title: "機門" },
+		            { title: "表訂日期" },
+		            { title: "表訂時間" },
+		            { title: "預計日期" },
+		            { title: "預計時間" },
+		            { title: "往來地點" },
+		            { title: "往來地點英文" },
+		            { title: "往來地點中文" },
+		            { title: "狀態" },
+		            { title: "機型" }
+
+		        ]
+		    } );
+
+
+      });
+
+//console.log(AirData);
+
+</script>
+
+  </body>
+</html>    
+
